@@ -262,11 +262,19 @@ function makeIosString(object, textIndex, options) {
     if(identifier == "") {
       continue;
     }
-    
+
+    text = convertAndroidVarsToIOS(text)
+   
     exportString += '"' + identifier + '" = "' + text + "\";\n";
   }
   
   return exportString;
+}
+
+function convertAndroidVarsToIOS(text) {
+    var regex = /%1s/gi;
+    text = text.replace(regex,'%@')
+    return text
 }
 
 
