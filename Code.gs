@@ -422,3 +422,21 @@ function arrayTranspose_(data) {
 
   return ret;
 }
+
+function onEdit(e) { 
+  var sName = e.source.getActiveSheet().getSheetName();  
+  if(sName !== "Logging") {
+    var value;
+    var mA1 = e.range.getA1Notation().split(":")[0];
+    var time = new Date().toTimeString();    
+    if(typeof(e.value) == 'string') {
+      var aCell = e.source.getRange(mA1);
+      value = aCell.getValue();
+      var form = "'" + aCell.getFormula();
+    } else {
+      value = e.value;      
+    }
+    var data = [sName, mA1, time, value, form];
+    e.source.getSheetByName("Logging").appendRow(data);
+  }
+}
