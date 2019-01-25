@@ -272,7 +272,7 @@ function makeIosString(object, textIndex, options) {
 }
 
 function convertAndroidVarsToIOS(text) {
-    var regex = /%1s|%s1/gi;
+    var regex = /%1s|%s1|%s/gi;
     text = text.replace(regex,'%@')
     return text
 }
