@@ -264,7 +264,7 @@ function makeIosString(object, textIndex, options) {
     }
 
     text = convertAndroidVarsToIOS(text)
-    text = text.toLowerCase()
+    
    
     exportString += '"' + identifier + '" = "' + text + "\";\n";
   }
