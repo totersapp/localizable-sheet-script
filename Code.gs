@@ -15,7 +15,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    The number of languages you support. Please check the README.md for more
    information on column positions.
 */
-var NUMBER_OF_LANGUAGES = 2;
+var NUMBER_OF_LANGUAGES = 4;
 
 /* 
    The script expects two columns for iOS and Android identifiers, respectively,
