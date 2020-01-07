@@ -128,18 +128,17 @@ function makeButton(app, parent, name, callback) {
   return button;
 }
 
-function makeTextBox(app, name) { 
-  var textArea = app.createTextArea().setWidth('100%').setHeight('100px').setId(name).setName(name);
-  return textArea;
+function makeTextBox(app, name, text) { 
+  var textArea = app.append('<textarea cols="80" rows="8" id="'+name+'" name="'+name+'">'+text+'</textarea><br>')
+  return textArea
 }
 
 function displayTexts_(texts) {
   
-  var app = UiApp.createApplication().setTitle('Export');
+  var app= HtmlService.createHtmlOutput().setTitle('Export')
 
   for (var i = 0; i < texts.length; i++) {
-    app.add(makeTextBox(app, 'json' + i));
-    app.getElementById('json' + i).setText(texts[i]); 
+    app.append(makeTextBox(app, 'json' + i, texts[i]));
   }
   
   var ss = SpreadsheetApp.getActiveSpreadsheet(); 
