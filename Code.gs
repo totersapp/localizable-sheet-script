@@ -16,6 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    information on column positions.
 */
 var NUMBER_OF_LANGUAGES = 4;
+var SUPPORTED_LANGUAGES = ["EN: English","AR: Arabic","CKB: Central Kurdish Sorani","KU: Kurdish"];
 
 /* 
    The script expects two columns for iOS and Android identifiers, respectively,
@@ -128,8 +129,8 @@ function makeButton(app, parent, name, callback) {
   return button;
 }
 
-function makeTextBox(app, name, text) { 
-  var textArea = app.append('<textarea cols="80" rows="8" id="'+name+'" name="'+name+'">'+text+'</textarea><br>')
+function makeTextBox(app, index, text) { 
+  var textArea = app.append('<p>'+ SUPPORTED_LANGUAGES[index] + '</p> </br><textarea cols="50%" rows="8">'+text+'</textarea><br>')
   return textArea
 }
 
@@ -138,7 +139,7 @@ function displayTexts_(texts) {
   var app= HtmlService.createHtmlOutput().setTitle('Export')
 
   for (var i = 0; i < texts.length; i++) {
-    app.append(makeTextBox(app, 'json' + i, texts[i]));
+    app.append(makeTextBox(app, i, texts[i]));
   }
   
   var ss = SpreadsheetApp.getActiveSpreadsheet(); 
