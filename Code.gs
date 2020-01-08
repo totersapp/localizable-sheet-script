@@ -130,7 +130,7 @@ function makeButton(app, parent, name, callback) {
 }
 
 function makeTextBox(app, index, text) { 
-  var textArea = app.append('<p>'+ SUPPORTED_LANGUAGES[index] + '</p> </br><textarea cols="50%" rows="8">'+text+'</textarea><br>')
+  var textArea = app.append('<p>'+ SUPPORTED_LANGUAGES[index] + '</b> </br><textarea cols="50%" rows="8" id="exported_' + index + '">'+text+'</textarea><br>')
   return textArea
 }
 
