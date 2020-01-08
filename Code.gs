@@ -136,7 +136,7 @@ function makeTextBox(app, index, text) {
 
 function displayTexts_(texts) {
   
-  var app= HtmlService.createHtmlOutput().setTitle('Export')
+  var app= HtmlService.createHtmlOutput('<p style="color:red;font-size:15px;">Copy paste the translated texts into your localized files</p>').setTitle('Toters Customer App')
 
   for (var i = 0; i < texts.length; i++) {
     app.append(makeTextBox(app, i, texts[i]));
