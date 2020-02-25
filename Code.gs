@@ -15,9 +15,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    The number of languages you support. Please check the README.md for more
    information on column positions.
 */
-var NUMBER_OF_LANGUAGES = 4;
-var SUPPORTED_LANGUAGES = ["EN: English","AR: Arabic","CKB: Central Kurdish Sorani","KU: Kurdish"];
-
+var NUMBER_OF_LANGUAGES = 3;
+var SUPPORTED_LANGUAGES = ["EN: English","AR: Arabic","CKB: Central Kurdish Sorani"];
 /* 
    The script expects two columns for iOS and Android identifiers, respectively,
    and a column after that with all of the string values. This is the position of
@@ -26,9 +25,9 @@ var SUPPORTED_LANGUAGES = ["EN: English","AR: Arabic","CKB: Central Kurdish Sora
 var FIRST_COLUMN_POSITION = 1;
 
 /*
-   The position of the header containing the strings "Identifier iOS" and "Identifier Android"
+   The position of the header containing the strings "Identifier"
 */
-var HEADER_ROW_POSITION = 1;
+var HEADER_ROW_POSITION = 2;
 
 /*
    True if iOS output should contain a `Localizable` `enum` that contains all of
@@ -130,13 +129,13 @@ function makeButton(app, parent, name, callback) {
 }
 
 function makeTextBox(app, index, text) { 
-  var textArea = app.append('<p>'+ SUPPORTED_LANGUAGES[index] + '</b> </br><textarea cols="50%" rows="8" id="exported_' + index + '">'+text+'</textarea><br>')
+  var textArea = app.append('<p>'+ SUPPORTED_LANGUAGES[index] + '</p> </br><textarea cols="50%" rows="8" id="exported_' + index + '">'+text+'</textarea><br>')
   return textArea
 }
 
 function displayTexts_(texts) {
   
-  var app= HtmlService.createHtmlOutput('<p style="color:red;font-size:15px;">Copy paste the translated texts into your localized files</p>').setTitle('Toters Customer App')
+ var app= HtmlService.createHtmlOutput('<p style="color:red;font-size:15px;">Copy paste the translated texts into your localized files</p>').setTitle('Toters Customer App')
 
   for (var i = 0; i < texts.length; i++) {
     app.append(makeTextBox(app, i, texts[i]));
@@ -178,7 +177,7 @@ function makeAndroidString(object, textIndex, options) {
   for(var i=0; i<object.length; i++) {
     
     var o = object[i];
-    var identifier = o.identifierAndroid;
+    var identifier = o.identifier;
     
     var text = o.texts[textIndex];
     
@@ -236,7 +235,7 @@ function makeIosString(object, textIndex, options) {
         continue;
       }
     
-      var identifier = o.identifierIos;
+      var identifier = o.identifier;
       
       if (identifier == "") {
         continue;
@@ -252,7 +251,7 @@ function makeIosString(object, textIndex, options) {
   
   for(var i=0; i<object.length; i++) {
     var o = object[i];
-    var identifier = o.identifierIos;
+    var identifier = o.identifier;
     var text = o.texts[textIndex];
     
     if (text == undefined || text == "") {
@@ -288,7 +287,7 @@ function convertAndroidVarsToIOS(text) {
    - returns: a string array of the headers
 */
 function getNormalizedHeaders(sheet, options) {
-  var headersRange = sheet.getRange(1, FIRST_COLUMN_POSITION, HEADER_ROW_POSITION, sheet.getMaxColumns());
+  var headersRange = sheet.getRange(2, FIRST_COLUMN_POSITION, HEADER_ROW_POSITION, sheet.getMaxColumns());
   var headers = headersRange.getValues()[0];
   return normalizeHeaders(headers);
 }
@@ -374,7 +373,7 @@ function getObjects(data, keys) {
         cellData = "";
       }
       
-      if (keys[j] != "identifierIos" && keys[j] != "identifierAndroid") {
+      if (keys[j] != "identifier") {
         object["texts"].push(cellData);
       } else {
         object[keys[j]] = cellData;
